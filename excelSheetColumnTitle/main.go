@@ -6,6 +6,9 @@ import (
 
 func main() {
 	fmt.Println(convertToTitle(27))
+	fmt.Println(convertToTitle2(27))
+	fmt.Println(convertToTitle(28))
+	fmt.Println(convertToTitle2(28))
 }
 
 func convertToTitle(n int) string {
@@ -18,4 +21,14 @@ func convertToTitle(n int) string {
 		result = letters[mole] + result
 	}
 	return result
+}
+
+func convertToTitle2(n int) string {
+	ret := ""
+	if n == 0 {
+		return ""
+	} else {
+		ret = convertToTitle((n-1)/26) + string('A'+(n-1)%26)
+	}
+	return ret
 }
