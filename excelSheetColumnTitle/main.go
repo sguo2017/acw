@@ -28,7 +28,7 @@ func convertToTitle2(n int) string {
 	if n == 0 {
 		return ""
 	} else {
-		ret = convertToTitle((n-1)/26) + string('A'+(n-1)%26)
+		ret = convertToTitle2((n-1)/26) + string('A'+(n-1)%26)
 	}
 	return ret
 }
