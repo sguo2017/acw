@@ -28,33 +28,33 @@ func getNext(sub []byte) (next []int) {
 	return next
 }
 
-func KMP(content []byte, start_index int, end_index int, sub []byte) (index int) {
+func KMP(content []byte, sub []byte) (index int) {
 	var (
-		next       []int = getNext(sub)
-		sub_index  int   = 0
-		sub_length int   = len(sub)
+		next    []int = getNext(sub)
+		lenghtC int   = len(content)
+		lenghtS int   = len(sub)
+		i       int   = 0
+		j       int   = 0
 	)
-	for i := start_index; i <= end_index; i++ {
-		if content[i] == sub[sub_index] {
-			match_start := i
-			for j := sub_index; j <= sub_length; j++ {
-				if j == sub_length {
-					return match_start - sub_index
-				}
-				if i >= end_index || content[i] != sub[j] {
-					sub_index = next[j]
-					break
-				}
-				i++
-			}
+	for i < lenghtC && j < lenghtS {
+		if j == -1 || content[i] == sub[j] {
+			i++
+			j++
+		} else {
+			j = next[j]
 		}
 	}
 
-	return -1
+	if j == lenghtS {
+		return i - j
+	} else {
+		return -1
+	}
+
 }
 
 func main() {
 	content := []byte("why every programming language use the hello world as the first test???")
 	sub := []byte("hello world")
-	fmt.Println(KMP(content, 0, len(content)-1, sub))
+	fmt.Println(KMP(content, sub))
 }
